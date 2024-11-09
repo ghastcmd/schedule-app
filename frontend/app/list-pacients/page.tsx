@@ -4,7 +4,7 @@ import GridItem from "../components/gridItem";
 
 export default function ListPacients() {
   return (
-    <div>
+    <div className='relative'>
       <Selector />
 
       <SearchBar />
@@ -29,20 +29,12 @@ export default function ListPacients() {
           <GridItem />
           <GridItem />
           <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
-          <GridItem />
         </div>
       </div>
+      <div className='rounded-full w-[100px] h-[100px] p-2 bg-green-400 flex items-center justify-center text-white text-7xl right-24 bottom-20 fixed'>
+          <span className='select-none'>+</span>
+      </div>     
+
     </div>
   );
 }
