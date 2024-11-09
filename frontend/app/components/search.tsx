@@ -5,9 +5,9 @@ import searchIcon from '/public/search.svg';
 export default function SearchBar() {
   return (
     <div className='flex justify-center mt-5 w-full'>
-      <div className='w-[30rem] relative'>
+      <div className='w-[40rem] relative'>
         <input 
-          className='w-full py-2 px-5'
+          className='w-full py-3 px-7 rounded-xl'
           type="text"
           placeholder='Digite o nome do paciente...'
         />

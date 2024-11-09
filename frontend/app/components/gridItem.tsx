@@ -18,7 +18,7 @@ export default function GridItem() {
           alt='user icon'
         />
         <h1
-          className='absolute float-end text-center bottom-2 bg-white border border-blue-400 rounded-lg px-2 py-1 bottom-3 w-full'
+          className='absolute float-end text-center bottom-2 bg-white border border-blue-400 rounded-lg px-2 py-1 bottom-3 w-full select-none'
         >
           Nome do paciente
         </h1>
