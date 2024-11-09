@@ -1,8 +1,12 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 import GridItem from "../components/gridItem";
+
+import Check from '/public/Check.svg';
+import Close from '/public/close.svg';
 
 function SchedulingPatient({ data }: { data: Array }) {
   
@@ -35,11 +39,11 @@ export default function PatientCanvas() {
 
   useEffect(() => {
     console.log('setting schedule');
-    // setSchedule();
+    setSchedule(schedule);
   });
 
   return (
-    <div className='flex flex-col items-center justify-center'>
+    <div className='flex flex-col items-center justify-center relative'>
       <h1 className='mt-10 text-3xl'>Informações do paciente</h1>
       
       <GridItem />
@@ -56,6 +60,17 @@ export default function PatientCanvas() {
         
         <SchedulingPatient data={schedule}/>
       </div>
+
+      <div className='rounded-full w-[100px] h-[100px] p-2 bg-green-400 flex items-center justify-center text-white text-7xl right-24 bottom-20 fixed'>
+          <span className='select-none'>
+            <Image src={Check} alt='check'/>
+          </span>
+      </div>
+
+      <div className='fixed top-10 right-28'>
+        <Image src={Close} alt='close'/>
+      </div>
+
     </div>
   );
 }
