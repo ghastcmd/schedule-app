@@ -31,6 +31,11 @@ export class SchedulesService {
     });
   }
 
+  async deleteSchedule(id: number): Promise<ScheduleEntity> {
+    await this.scheduleRepository.delete(id);
+    return this.scheduleRepository.findOne({ where: { id: id } });
+  }
+
   async create(schedule: Schedule): Promise<ScheduleEntity> {
     return await this.scheduleRepository.save(schedule);
   }

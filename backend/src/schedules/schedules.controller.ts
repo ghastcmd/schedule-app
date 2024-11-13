@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ScheduleEntity } from './database/schedule.entity';
 import { SchedulesService } from './schedules.service';
 import { Schedule } from './interfaces/schedule.interface';
@@ -23,8 +31,12 @@ export class SchedulesController {
     @Param('id') id: string,
     @Body() schedule: Schedule,
   ): Promise<ScheduleEntity> {
-    const id_conv: number = +id;
-    return await this.schedulesService.updateSchedule(id_conv, schedule);
+    return await this.schedulesService.updateSchedule(+id, schedule);
+  }
+
+  @Delete(':id')
+  async deleteSchedule(@Param('id') id: string): Promise<ScheduleEntity> {
+    return await this.schedulesService.deleteSchedule(+id);
   }
 
   @Post()
