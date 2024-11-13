@@ -21,6 +21,16 @@ export class SchedulesService {
     return await this.scheduleRepository.find({ relations: ['patient'] });
   }
 
+  async updateSchedule(
+    id: number,
+    schedule: Schedule,
+  ): Promise<ScheduleEntity> {
+    await this.scheduleRepository.update(id, schedule);
+    return await this.scheduleRepository.findOne({
+      where: { id: schedule.id },
+    });
+  }
+
   async create(schedule: Schedule): Promise<ScheduleEntity> {
     return await this.scheduleRepository.save(schedule);
   }
