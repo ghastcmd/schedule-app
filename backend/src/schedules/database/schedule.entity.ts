@@ -16,5 +16,5 @@ export class ScheduleEntity {
   notes: string;
 
   @ManyToOne(() => PatientEntity, (patient) => patient.schedules)
-  patients: PatientEntity[];
+  patient: PatientEntity[];
 }

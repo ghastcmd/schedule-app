@@ -11,8 +11,14 @@ export class SchedulesService {
     private scheduleRepository: Repository<ScheduleEntity>,
   ) {}
 
+  async findAllPatient(id: number): Promise<ScheduleEntity[]> {
+    return await this.scheduleRepository.find({
+      where: { patient: { id: id } },
+    });
+  }
+
   async findAll(): Promise<ScheduleEntity[]> {
-    return await this.scheduleRepository.find();
+    return await this.scheduleRepository.find({ relations: ['patient'] });
   }
 
   async create(schedule: Schedule): Promise<ScheduleEntity> {

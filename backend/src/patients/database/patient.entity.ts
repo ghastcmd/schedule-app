@@ -15,6 +15,6 @@ export class PatientEntity {
   @Column({ nullable: true })
   followup: string;
 
-  @OneToMany(() => ScheduleEntity, (schedule) => schedule.patients)
+  @OneToMany(() => ScheduleEntity, (schedule) => schedule.patient)
   schedules: ScheduleEntity[];
 }
