@@ -25,4 +25,12 @@ export class PatientsService {
       where: { id: id },
     });
   }
+
+  async delete(id: number): Promise<PatientEntity> {
+    const patient = await this.patientRepository.findOne({
+      where: { id: id },
+    });
+    await this.patientRepository.delete(id);
+    return patient;
+  }
 }

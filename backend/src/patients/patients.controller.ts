@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { PatientsService } from './patients.service';
 import { PatientEntity } from 'src/patients/database/patient.entity';
 import { Patient } from './interfaces/patient.interface';
@@ -18,10 +26,15 @@ export class PatientsController {
   }
 
   @Patch(':id')
-  async updateSchedule(
+  async update(
     @Param('id') id: string,
     @Body() patient: Patient,
   ): Promise<PatientEntity> {
     return await this.patientsService.update(+id, patient);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<PatientEntity> {
+    return await this.patientsService.delete(+id);
   }
 }
