@@ -9,10 +9,10 @@ export class ScheduleEntity {
   @Column()
   date: string;
 
-  @Column()
+  @Column({ nullable: true })
   time: string;
 
-  @Column()
+  @Column({ nullable: true })
   notes: string;
 
   @ManyToOne(() => PatientEntity, (patient) => patient.schedules)
