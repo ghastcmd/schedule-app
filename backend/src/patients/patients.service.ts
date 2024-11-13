@@ -18,4 +18,11 @@ export class PatientsService {
   async create(patient: Patient): Promise<PatientEntity> {
     return await this.patientRepository.save(patient);
   }
+
+  async update(id: number, patient: Patient): Promise<PatientEntity> {
+    await this.patientRepository.update(id, patient);
+    return await this.patientRepository.findOne({
+      where: { id: id },
+    });
+  }
 }
