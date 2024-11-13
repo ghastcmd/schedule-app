@@ -12,7 +12,7 @@ export class PatientEntity {
   @Column()
   phone: string;
 
-  @Column()
+  @Column({ nullable: true })
   followup: string;
 
   @OneToMany(() => ScheduleEntity, (schedule) => schedule.patients)
