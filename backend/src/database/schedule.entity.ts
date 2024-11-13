@@ -1,6 +1,6 @@
 import { Entity } from 'typeorm';
 
-@Entity(Schedule)
+@Entity('schedule')
 export class Schedule {
   date: string;
   time: string;
