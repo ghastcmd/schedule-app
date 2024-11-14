@@ -90,11 +90,11 @@ export default function PatientCanvas({
       headers: {
         "Content-Type": "application/json",
       },
-      body: {
+      body: JSON.stringify({
         name: name,
         phone: phone,
         followup: followup,
-      },
+      }),
     });
 
     console.log("clicked send");
@@ -168,7 +168,7 @@ export default function PatientCanvas({
         onClick={() => sendUpdate()}
         className="rounded-full w-[100px] h-[100px] p-2 bg-green-400 flex items-center justify-center text-white text-7xl right-24 bottom-20 fixed"
       >
-        <span className="select-none">
+        <span className="select-none cursor-pointer">
           <Image src={Check} alt="check" />
         </span>
       </div>
