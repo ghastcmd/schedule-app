@@ -20,6 +20,11 @@ export class PatientsController {
     return await this.patientsService.findAll();
   }
 
+  @Get(':id')
+  async indexOne(@Param('id') id: string): Promise<PatientEntity> {
+    return await this.patientsService.findOne(id);
+  }
+
   @Post()
   async create(@Body() patient: Patient): Promise<Patient> {
     return await this.patientsService.create(patient);

@@ -4,6 +4,7 @@ import Selector from "../components/selector";
 import SearchBar from "../components/search";
 import GridItem from "../components/gridItem";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function ListPacients() {
   const [patients, setPatientsState] = useState([{ name: "Nome do paciente" }]);
@@ -32,7 +33,9 @@ export default function ListPacients() {
       <div className="">
         <div className="grid gap-4 grid-cols-5 auto-rows-max mt-[2rem] mx-[10rem]">
           {patients.map((patient, index) => (
-            <GridItem nome={patient.name} key={index} />
+            <Link key={index} href={`/list-patients/${patient.id}`}>
+              <GridItem nome={patient.name} id={patient.id} />
+            </Link>
           ))}
         </div>
       </div>
