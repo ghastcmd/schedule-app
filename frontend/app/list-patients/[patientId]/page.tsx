@@ -31,13 +31,46 @@ function renderSwitch(type: string, value: string, key: number) {
   );
 }
 
-function SchedulingPatient({ data }: { data: Array }) {
+function SchedulingPatient({
+  data,
+  id,
+  toggleUpdate,
+  setToggleUpdate,
+}: {
+  data: Array;
+  id: number;
+  toggleUpdate: bool;
+  setToggleUpdate: (bool) => void;
+}) {
+  const addSchedule = async () => {
+    const toAddDate = new Date();
+    toAddDate.setFullYear(toAddDate.getFullYear() + 2);
+
+    fetch("http://localhost:3030/schedules", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: `${toAddDate.getFullYear()}-01-01`,
+        time: "00:00",
+        notes: "Novo",
+        patient: id,
+      }),
+    });
+
+    setToggleUpdate(!toggleUpdate);
+  };
+
   return (
     <div className="bg-white h-[10rem] relative flex flex-row justify-end">
       {data.map((e, k) => renderSwitch(e.type, e, k))}
 
       <div className="h-full w-[8rem]">
-        <div className="bg-sky-400 w-[7rem] h-[5rem] top-20 absolute rounded-t-xl mx-2">
+        <div
+          onClick={() => addSchedule()}
+          className="bg-sky-400 w-[7rem] h-[5rem] top-20 absolute rounded-t-xl mx-2 cursor-pointer"
+        >
           <div className="text-white font-bold flex justify-center items-center h-full text-4xl">
             +
           </div>
@@ -52,6 +85,7 @@ export default function PatientCanvas({
 }: {
   params: { patientId: string };
 }) {
+  const [toggleUpdate, setToggleUpdate] = useState(false);
   const [id, setId] = useState(0);
   const [patient, setPatient] = useState({
     name: "name",
@@ -113,7 +147,7 @@ export default function PatientCanvas({
 
   useEffect(() => {
     fetchPatient();
-  }, []);
+  }, [toggleUpdate]);
 
   const updateValues = async () => {
     setName(patient.name);
@@ -172,7 +206,12 @@ export default function PatientCanvas({
 
         <h1 className="my-2">Agendamentos</h1>
 
-        <SchedulingPatient data={schedule} />
+        <SchedulingPatient
+          data={schedule}
+          id={id}
+          toggleUpdate={toggleUpdate}
+          setToggleUpdate={setToggleUpdate}
+        />
       </div>
 
       <div
