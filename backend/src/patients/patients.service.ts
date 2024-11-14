@@ -16,7 +16,10 @@ export class PatientsService {
   }
 
   async findOne(id: string): Promise<PatientEntity> {
-    return await this.patientRepository.findOne({ where: { id: +id } });
+    return await this.patientRepository.findOne({
+      where: { id: +id },
+      relations: ['schedules'],
+    });
   }
 
   async create(patient: Patient): Promise<PatientEntity> {
