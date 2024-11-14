@@ -71,7 +71,7 @@ function SchedulingPatient({
     const toAddDate = new Date();
     toAddDate.setFullYear(toAddDate.getFullYear() + 2);
 
-    fetch("http://localhost:3030/schedules", {
+    await fetch("http://localhost:3030/schedules", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

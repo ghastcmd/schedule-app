@@ -4,10 +4,6 @@ import Elipse from "/public/Ellipse 1.svg";
 import User from "/public/User.svg";
 
 export default function GridItem({ nome, id }: { nome: string; id: number }) {
-  const handleClick = (id) => {
-    console.log("clicked on patient " + id);
-  };
-
   return (
     <div
       className={`relative flex justify-center mt-10 ${

@@ -16,3 +16,9 @@ Remover AGENDAMENTO do paciente
 Retornar AGENDAMENTOS do paciente
 
 Buscar AGENDAMENTOS por SEMANA (geral - duh)
+
+## what still needs to be implemented:
+
+schedules per week
+delete patient
+search per name
