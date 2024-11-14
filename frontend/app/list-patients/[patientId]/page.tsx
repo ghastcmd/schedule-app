@@ -87,6 +87,11 @@ export default function PatientCanvas({
         value.type = "after";
       }
     });
+    _data.schedules.sort((a, b) => {
+      const aDate = new Date(a.date);
+      const bDate = new Date(b.date);
+      return aDate - bDate;
+    });
     setSchedule(_data.schedules);
   };
 
