@@ -10,8 +10,9 @@ export default function GridItem({ nome, id }: { nome: string; id: number }) {
 
   return (
     <div
-      className="relative flex justify-center mt-10 cursor-pointer"
-      onClick={() => handleClick(id)}
+      className={`relative flex justify-center mt-10 ${
+        nome !== "" ?? "cursor-pointer"
+      }`}
     >
       <div className="relative">
         <Image
