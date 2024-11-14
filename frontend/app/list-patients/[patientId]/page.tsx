@@ -9,26 +9,30 @@ import Check from "/public/Check.svg";
 import Close from "/public/close.svg";
 import Link from "next/link";
 
-function SchedulingPatient({ data }: { data: Array }) {
-  function renderSwitch(type: string, value: string, key: number) {
-    return (
-      <div className="h-full w-[8rem]" key={key}>
-        <div
-          className={`${
-            type === "after"
-              ? "bg-sky-400 h-[9.5rem] top-2"
-              : "bg-cyan-300 h-[7.5rem] top-10 text-white"
-          } w-[7rem] absolute rounded-t-xl mx-2`}
-        >
-          <div className="m-2 text-white font-bold">{value}</div>
+function renderSwitch(type: string, value: string, key: number) {
+  return (
+    <div className="h-full w-[8rem]" key={key}>
+      <div
+        className={`${
+          type === "after"
+            ? "bg-sky-400 h-[9.5rem] top-2"
+            : "bg-cyan-300 h-[7.5rem] top-10 text-white"
+        } w-[7rem] absolute rounded-t-xl mx-2`}
+      >
+        <div className="m-2 text-white font-bold">
+          <h1>{value.date}</h1>
+          <h1>{value.time}</h1>
+          <h1>{value.notes}</h1>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
+function SchedulingPatient({ data }: { data: Array }) {
   return (
     <div className="bg-white h-[10rem] relative flex flex-row justify-end">
-      {data.map((e, k) => renderSwitch(e.type, e.value, k))}
+      {data.map((e, k) => renderSwitch(e.type, e, k))}
 
       <div className="h-full w-[8rem]">
         <div className="bg-sky-400 w-[7rem] h-[5rem] top-20 absolute rounded-t-xl mx-2">
