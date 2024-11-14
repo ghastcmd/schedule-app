@@ -7,9 +7,24 @@ import GridItem from "/app/components/gridItem";
 
 import Check from "/public/Check.svg";
 import Close from "/public/close.svg";
+import Trash from "/public/Trash.svg";
 import Link from "next/link";
 
-function renderSwitch(type: string, value: string, key: number) {
+function renderSwitch(
+  type: string,
+  value: string,
+  key: number,
+  toggle: () => void
+) {
+  const deleteClick = async (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    await fetch(`http://localhost:3030/schedules/${value.id}`, {
+      method: "DELETE",
+    });
+    toggle();
+  };
+
   return (
     <div className="h-full w-[8rem]" key={key}>
       <Link href={`/schedule-canvas/${value.id}`}>
@@ -25,6 +40,16 @@ function renderSwitch(type: string, value: string, key: number) {
             <h1>{value.time}</h1>
             <h1>{value.notes}</h1>
           </div>
+          {type === "after" ? (
+            <div
+              onClick={(e) => deleteClick(e)}
+              className="flex justify-center items-center z-10"
+            >
+              <Image src={Trash} alt="delete" className="absolute bottom-2" />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </Link>
     </div>
@@ -33,12 +58,12 @@ function renderSwitch(type: string, value: string, key: number) {
 
 function SchedulingPatient({
   data,
-  id,
+  patientId,
   toggleUpdate,
   setToggleUpdate,
 }: {
   data: Array;
-  id: number;
+  patientId: number;
   toggleUpdate: bool;
   setToggleUpdate: (bool) => void;
 }) {
@@ -55,7 +80,7 @@ function SchedulingPatient({
         date: `${toAddDate.getFullYear()}-01-01`,
         time: "00:00",
         notes: "Novo",
-        patient: id,
+        patient: patientId,
       }),
     });
 
@@ -64,7 +89,9 @@ function SchedulingPatient({
 
   return (
     <div className="bg-white h-[10rem] relative flex flex-row justify-end">
-      {data.map((e, k) => renderSwitch(e.type, e, k))}
+      {data.map((e, k) =>
+        renderSwitch(e.type, e, k, () => setToggleUpdate(!toggleUpdate))
+      )}
 
       <div className="h-full w-[8rem]">
         <div
@@ -141,8 +168,6 @@ export default function PatientCanvas({
         followup: followup,
       }),
     });
-
-    console.log("clicked send");
   };
 
   useEffect(() => {
@@ -208,7 +233,7 @@ export default function PatientCanvas({
 
         <SchedulingPatient
           data={schedule}
-          id={id}
+          patientId={id}
           toggleUpdate={toggleUpdate}
           setToggleUpdate={setToggleUpdate}
         />
