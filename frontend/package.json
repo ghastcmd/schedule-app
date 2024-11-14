@@ -2,6 +2,7 @@
   "name": "scheduling-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3030",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
