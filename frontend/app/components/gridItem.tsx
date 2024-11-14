@@ -3,7 +3,7 @@ import Image from "next/image";
 import Elipse from "/public/Ellipse 1.svg";
 import User from "/public/User.svg";
 
-export default function GridItem({ nome, id }: { nome: string; id: number }) {
+export default function GridItem({ nome }: { nome: string }) {
   return (
     <div
       className={`relative flex justify-center mt-10 ${
