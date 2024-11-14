@@ -12,19 +12,21 @@ import Link from "next/link";
 function renderSwitch(type: string, value: string, key: number) {
   return (
     <div className="h-full w-[8rem]" key={key}>
-      <div
-        className={`${
-          type === "after"
-            ? "bg-sky-400 h-[9.5rem] top-2"
-            : "bg-cyan-300 h-[7.5rem] top-10 text-white"
-        } w-[7rem] absolute rounded-t-xl mx-2`}
-      >
-        <div className="m-2 text-white font-bold">
-          <h1>{value.date}</h1>
-          <h1>{value.time}</h1>
-          <h1>{value.notes}</h1>
+      <Link href={`/schedule-canvas/${value.id}`}>
+        <div
+          className={`${
+            type === "after"
+              ? "bg-sky-400 h-[9.5rem] top-2"
+              : "bg-cyan-300 h-[7.5rem] top-10 text-white"
+          } w-[7rem] absolute rounded-t-xl mx-2`}
+        >
+          <div className="m-2 text-white font-bold">
+            <h1>{value.date}</h1>
+            <h1>{value.time}</h1>
+            <h1>{value.notes}</h1>
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

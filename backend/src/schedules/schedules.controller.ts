@@ -15,6 +15,11 @@ import { Schedule } from './interfaces/schedule.interface';
 export class SchedulesController {
   constructor(private readonly schedulesService: SchedulesService) {}
 
+  @Get('s/:id')
+  async indexOne(@Param('id') id: string): Promise<ScheduleEntity[]> {
+    return await this.schedulesService.findOne(id);
+  }
+
   @Get('')
   async index(): Promise<ScheduleEntity[]> {
     return await this.schedulesService.findAll();
