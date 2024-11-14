@@ -7,6 +7,7 @@ import GridItem from "/app/components/gridItem";
 import Check from "/public/Check.svg";
 import Close from "/public/close.svg";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function ScheduleCanvas({ params }: { params: { id: string } }) {
   const [name, setName] = useState("Nome do paciente");
@@ -14,8 +15,10 @@ export default function ScheduleCanvas({ params }: { params: { id: string } }) {
   const [date, setDate] = useState("2024-01-01");
   const [time, setTime] = useState("13:30");
   const [note, setNote] = useState("");
+  const [id, setId] = useState(0);
 
   const updateDate = (e) => {
+    console.log(e.target.value);
     setDate(e.target.value);
   };
 
@@ -32,16 +35,35 @@ export default function ScheduleCanvas({ params }: { params: { id: string } }) {
     const data = await fetch(`http://localhost:3030/schedules/s/${id}`);
     let _data = await data.json();
     _data = _data[0];
+    console.log(_data.date);
     setDate(_data.date);
     setTime(_data.time);
-    setNote(_data.note !== null ? _data.note : "");
+    setNote(_data.notes !== null ? _data.notes : "");
     setName(_data.patient.name);
     setPhone(_data.patient.phone);
+    setId(_data.patient.id);
   };
 
   useEffect(() => {
     fetchSchedule();
   }, []);
+
+  const sendUpdate = async () => {
+    const scheduleId = await params.then((e) => e.id);
+    await fetch(`http://localhost:3030/schedules/${scheduleId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: date,
+        time: time,
+        notes: note,
+      }),
+    });
+
+    console.log("clicked send");
+  };
 
   return (
     <div className="flex flex-col items-center justify-center relative">
@@ -83,14 +105,19 @@ export default function ScheduleCanvas({ params }: { params: { id: string } }) {
         ></textarea>
       </div>
 
-      <div className="rounded-full w-[100px] h-[100px] p-2 bg-green-400 flex items-center justify-center text-white text-7xl right-24 bottom-20 fixed">
-        <span className="select-none">
+      <div
+        onClick={() => sendUpdate()}
+        className="rounded-full w-[100px] h-[100px] p-2 bg-green-400 flex items-center justify-center text-white text-7xl right-24 bottom-20 fixed"
+      >
+        <span className="select-none cursor-pointer">
           <Image src={Check} alt="check" />
         </span>
       </div>
 
       <div className="fixed top-10 right-28">
-        <Image src={Close} alt="close" />
+        <Link href={`/list-patients/${id}`}>
+          <Image src={Close} alt="close" />
+        </Link>
       </div>
     </div>
   );
