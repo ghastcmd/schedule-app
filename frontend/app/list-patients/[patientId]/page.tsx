@@ -170,6 +170,13 @@ export default function PatientCanvas({
     });
   };
 
+  const deletePatient = async () => {
+    await fetch(`http://localhost:3030/patients/${id}`, {
+      method: "DELETE",
+    });
+    window.location = "/list-patients";
+  };
+
   useEffect(() => {
     fetchPatient();
   }, [toggleUpdate]);
@@ -239,13 +246,23 @@ export default function PatientCanvas({
         />
       </div>
 
-      <div
-        onClick={() => sendUpdate()}
-        className="rounded-full w-[100px] h-[100px] p-2 bg-green-400 flex items-center justify-center text-white text-7xl right-24 bottom-20 fixed"
-      >
-        <span className="select-none cursor-pointer">
-          <Image src={Check} alt="check" />
-        </span>
+      <div className="flex flex-cols right-24 bottom-20 fixed">
+        <div
+          onClick={() => deletePatient()}
+          className="cursor-pointer rounded-full w-[100px] h-[100px] mr-10 p-2 bg-red-500 flex items-center justify-center text-white text-7xl"
+        >
+          <span className="select-none cursor-pointer">
+            <Image src={Trash} alt="check" />
+          </span>
+        </div>
+        <div
+          onClick={() => sendUpdate()}
+          className="cursor-pointer rounded-full w-[100px] h-[100px] p-2 bg-green-400 flex items-center justify-center text-white text-7xl"
+        >
+          <span className="select-none">
+            <Image src={Check} alt="check" />
+          </span>
+        </div>
       </div>
 
       <div className="fixed top-10 right-28">
