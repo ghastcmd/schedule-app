@@ -26,7 +26,7 @@ export default function ListPacients() {
 
   return (
     <div className="relative">
-      <Selector />
+      <Selector pageName="patients" />
 
       <SearchBar />
 
