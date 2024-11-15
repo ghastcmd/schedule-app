@@ -21,6 +21,6 @@ Buscar AGENDAMENTOS por SEMANA (geral - duh)
 
 - [x] schedules per week
 - [ ] delete patient
-- [ ] button to add patient
+- [x] button to add patient
 - [x] search per name
 - [x] menu for chosing a page

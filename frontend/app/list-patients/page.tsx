@@ -32,6 +32,24 @@ export default function ListPacients() {
 
   useEffect(() => {}, [toggle]);
 
+  const createUser = async () => {
+    const data = await fetch("http://localhost:3030/patients", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "Nome do paciente",
+        phone: "(00) 00000-0000",
+        followup: "",
+        schedules: [{}],
+      }),
+    });
+    const _data = await data.json();
+
+    window.location = `/list-patients/${_data.id}`;
+  };
+
   return (
     <div className="relative">
       <Selector pageName="patients" />
@@ -47,7 +65,10 @@ export default function ListPacients() {
           ))}
         </div>
       </div>
-      <div className="rounded-full w-[100px] h-[100px] p-2 bg-green-400 flex items-center justify-center text-white text-7xl right-24 bottom-20 fixed">
+      <div
+        onClick={() => createUser()}
+        className="cursor-pointer rounded-full w-[100px] h-[100px] p-2 bg-green-400 flex items-center justify-center text-white text-7xl right-24 bottom-20 fixed"
+      >
         <span className="select-none">+</span>
       </div>
     </div>
