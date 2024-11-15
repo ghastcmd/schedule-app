@@ -19,8 +19,8 @@ Buscar AGENDAMENTOS por SEMANA (geral - duh)
 
 ## what still needs to be implemented:
 
-schedules per week
-delete patient
-search per name
-button to add patient
-menu for chosing a page
+- [ ] schedules per week
+- [ ] delete patient
+- [ ] search per name
+- [ ] button to add patient
+- [x] menu for chosing a page

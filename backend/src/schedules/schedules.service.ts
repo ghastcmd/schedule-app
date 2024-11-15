@@ -28,6 +28,28 @@ export class SchedulesService {
     return await this.scheduleRepository.find({ relations: ['patient'] });
   }
 
+  async findDay(day: string): Promise<ScheduleEntity[]> {
+    return await this.scheduleRepository.find({
+      where: { date: day },
+      relations: ['patient'],
+    });
+  }
+
+  async findWeek(date: string): Promise<ScheduleEntity[][]> {
+    const retArray = [];
+
+    const currentDate = new Date(date);
+    currentDate.setDate(currentDate.getDate() - currentDate.getDay());
+    for (let i = 0; i < 7; i++) {
+      const formattedDate = currentDate.toISOString().split('T')[0];
+      const retData = await this.findDay(formattedDate);
+      retArray.push(retData);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return retArray;
+  }
+
   async updateSchedule(
     id: number,
     schedule: Schedule,

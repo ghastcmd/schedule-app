@@ -31,6 +31,11 @@ export class SchedulesController {
     return await this.schedulesService.findAllPatient(id_conv);
   }
 
+  @Get('d/:day')
+  async getWeek(@Param('day') day: string): Promise<ScheduleEntity[][]> {
+    return await this.schedulesService.findWeek(day);
+  }
+
   @Patch(':id')
   async updateSchedule(
     @Param('id') id: string,
