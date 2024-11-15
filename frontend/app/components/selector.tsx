@@ -33,7 +33,7 @@ export default function Selector({ pageName }: { pageName: string }) {
       >
         <option value="menu">Menu</option>
         <option value="patients">Pacientes</option>
-        <option value="calendar">Agenda Mensal</option>
+        <option value="calendar">Agenda Semanal</option>
       </select>
     </div>
   );
