@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PatientEntity } from 'src/patients/database/patient.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { Patient } from './interfaces/patient.interface';
 
 @Injectable()
@@ -11,8 +11,16 @@ export class PatientsService {
     private patientRepository: Repository<PatientEntity>,
   ) {}
 
-  async findAll(): Promise<PatientEntity[]> {
-    return await this.patientRepository.find();
+  async findAll(query: string): Promise<PatientEntity[]> {
+    if (query !== undefined) {
+      return await this.patientRepository.find({
+        where: {
+          name: Like(`%${query}%`),
+        },
+      });
+    } else {
+      return await this.patientRepository.find();
+    }
   }
 
   async findOne(id: string): Promise<PatientEntity> {

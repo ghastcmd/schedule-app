@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { PatientsService } from './patients.service';
 import { PatientEntity } from 'src/patients/database/patient.entity';
@@ -15,9 +16,9 @@ import { Patient } from './interfaces/patient.interface';
 export class PatientsController {
   constructor(private readonly patientsService: PatientsService) {}
 
-  @Get()
-  async index(): Promise<PatientEntity[]> {
-    return await this.patientsService.findAll();
+  @Get('')
+  async index(@Query('name') query: string): Promise<PatientEntity[]> {
+    return await this.patientsService.findAll(query);
   }
 
   @Get(':id')

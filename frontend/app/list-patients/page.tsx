@@ -7,28 +7,36 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function ListPacients() {
-  const [patients, setPatientsState] = useState([{ name: "Nome do paciente" }]);
+  const [toggle, setToggle] = useState(false);
+  const [patients, setPatientsState] = useState([]);
 
-  const fetchPatients = async () => {
-    try {
-      const data = await fetch("http://localhost:3030/patients");
-      const _data = await data.json();
-      await setPatientsState(_data);
-      console.log(_data);
-    } catch {
-      console.log("couldn't fetch data");
+  const rerender = () => {
+    setToggle(!toggle);
+  };
+
+  const fetchPatients = async (searchString: string) => {
+    let query = "";
+    if (searchString !== "")
+      query = `http://localhost:3030/patients?name=${searchString}`;
+    else {
+      query = "http://localhost:3030/patients";
     }
+    const data = await fetch(query);
+    const _data = await data.json();
+    await setPatientsState(_data);
   };
 
   useEffect(() => {
-    fetchPatients();
+    fetchPatients("");
   }, []);
+
+  useEffect(() => {}, [toggle]);
 
   return (
     <div className="relative">
       <Selector pageName="patients" />
 
-      <SearchBar />
+      <SearchBar reset={rerender} fetchPatients={fetchPatients} />
 
       <div className="">
         <div className="grid gap-4 grid-cols-5 auto-rows-max mt-[2rem] mx-[10rem]">
