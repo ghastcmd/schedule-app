@@ -1,0 +1,30 @@
+{
+  "name": "schedule-app",
+  "version": "1.0.0",
+  "description": "This web application is made for the task of creating an environment of creating and managing patients and it's schedules. Thus, the system contains CRUD for patient and schedules, and also patient search and weekly schedule visualization.",
+  "homepage": "https://github.com/ghastcmd/schedule-app#readme",
+  "scripts": {
+    "all": "node index.js",
+    "start": "concurrently --names \"server,client\" \"npm run server\" \"npm run client\"",
+    "docker": "docker compose up",
+    "server": "cd backend && npm run start:dev",
+    "client": "cd frontend && npm run dev"
+  },
+  "bugs": {
+    "url": "https://github.com/ghastcmd/schedule-app/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghastcmd/schedule-app.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
