@@ -1,5 +1,6 @@
 "use client";
 
+import Menu from "../components/menu";
 import Selector from "/app/components/selector";
 
 import { useState, useEffect } from "react";
@@ -124,8 +125,8 @@ export default function Schedule() {
   }, [weekState]);
 
   return (
-    <div>
-      <Selector pageName="calendar" />
+    <div className="h-screen flex flex-col m-0">
+      <Menu />
 
       <div className="flex justify-center items-center">
         <input

@@ -25,6 +25,7 @@
     "doc": "docs"
   },
   "dependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "prettier": "^3.8.1"
   }
 }

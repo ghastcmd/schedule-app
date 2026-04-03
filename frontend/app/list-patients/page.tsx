@@ -5,6 +5,7 @@ import SearchBar from "../components/search";
 import GridItem from "../components/gridItem";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Menu from "../components/menu";
 
 export default function ListPacients() {
   const [toggle, setToggle] = useState(false);
@@ -51,8 +52,8 @@ export default function ListPacients() {
   };
 
   return (
-    <div className="relative">
-      <Selector pageName="patients" />
+    <div className="h-screen flex flex-col m-0">
+      <Menu />
 
       <SearchBar reset={rerender} fetchPatients={fetchPatients} />
 

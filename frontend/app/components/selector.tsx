@@ -23,7 +23,7 @@ export default function Selector({ pageName }: { pageName: string }) {
   };
 
   return (
-    <div className="ml-10 mt-10">
+    <div className="">
       <select
         className="border-solid border-2 border-gray-300 px py-1 pl-2 text-[1.3rem]"
         name="menu"
