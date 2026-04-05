@@ -1,21 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { useContext } from "react";
+import { MenuContext } from "../context/menuContext";
 
 export default function Menu() {
-  const [clicked, setClicked] = useState(false);
+  const openContext = useContext(MenuContext);
+  const [clicked, setClicked] = useState(openContext.openState);
 
   const toggleClicked = () => {
     setClicked(!clicked);
+    openContext.setOpenState(!clicked);
   };
-
-  const [page, setPage] = useState(".");
 
   const changePage = async (e) => {
     const value: string = e.currentTarget.dataset.value;
-    // setPage(value);
-
-    console.log(value);
 
     switch (value) {
       case "menu":

@@ -53,8 +53,6 @@ export default function ListPacients() {
 
   return (
     <div className="h-screen flex flex-col m-0">
-      <Menu />
-
       <SearchBar reset={rerender} fetchPatients={fetchPatients} />
 
       <div className="">

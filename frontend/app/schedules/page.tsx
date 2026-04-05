@@ -116,7 +116,7 @@ export default function Schedule() {
 
     setWeekSchedules(_data);
 
-    console.log(_data);
+    // console.log(_data);
   };
 
   useEffect(() => {
@@ -126,8 +126,6 @@ export default function Schedule() {
 
   return (
     <div className="h-screen flex flex-col m-0">
-      <Menu />
-
       <div className="flex justify-center items-center">
         <input
           className="p-2 px-6 border-slate-300"
