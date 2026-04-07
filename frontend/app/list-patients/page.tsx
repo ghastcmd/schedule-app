@@ -6,6 +6,8 @@ import GridItem from "../components/gridItem";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Menu from "../components/menu";
+import User from "/public/User.svg";
+import Image from "next/image";
 
 export default function ListPacients() {
   const [toggle, setToggle] = useState(false);
@@ -51,18 +53,60 @@ export default function ListPacients() {
     window.location = `/list-patients/${_data.id}`;
   };
 
+  console.log(patients);
+
   return (
     <div className="h-screen flex flex-col m-0">
       <SearchBar reset={rerender} fetchPatients={fetchPatients} />
 
-      <div className="">
-        <div className="grid gap-4 grid-cols-5 auto-rows-max mt-[2rem] mx-[10rem]">
-          {patients.map((patient, index) => (
-            <Link key={index} href={`/list-patients/${patient.id}`}>
-              <GridItem nome={patient.name} id={patient.id} />
-            </Link>
-          ))}
-        </div>
+      {/*  */}
+
+      <div className="w-4/5 items-center justify-center">
+        <table className="mt-[2rem] mx-[10rem] w-full">
+          <thead>
+            <tr className="border-b border-gray-200 bg-gray-50">
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                Nome do Paciente
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                Contato
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                Ação
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200 bg-white">
+            {patients.map((patient) => (
+              <tr key={patient.id} className="hover:bg-slate-100">
+                <td className="px-6 py-4">
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">
+                      {patient.name}
+                    </p>
+                    <p className="text-xs text-gray-500">{patient.insurance}</p>
+                  </div>
+                </td>
+                <td className="px-6 py-4">
+                  <div className="text-sm">
+                    <p className="text-gray-900">{patient.phone}</p>
+                    <p className="text-gray-500">{patient.email}</p>
+                  </div>
+                </td>
+                <td className="px-6 py-4">
+                  <Link href={`/list-patients/${patient.id}`}>
+                    <button
+                      // onClick={() => setSelectedPatient(patientDetails)}
+                      className="text-white hover:bg-sky-500 bg-sky-600 px-4 py-2 rounded-full text-sm font-medium"
+                    >
+                      Ver
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
       <div
         onClick={() => createUser()}
