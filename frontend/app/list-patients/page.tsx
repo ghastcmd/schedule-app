@@ -65,6 +65,9 @@ export default function ListPacients() {
         <table className="mt-[2rem] mx-[10rem] w-full">
           <thead>
             <tr className="border-b border-gray-200 bg-gray-50">
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase w-10">
+                Foto
+              </th>
               <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
                 Nome do Paciente
               </th>
@@ -79,6 +82,15 @@ export default function ListPacients() {
           <tbody className="divide-y divide-gray-200 bg-white">
             {patients.map((patient) => (
               <tr key={patient.id} className="hover:bg-slate-100">
+                <td className="px-6 py-4 h-full flex justify-center items-center">
+                  <Image
+                    className="z-0"
+                    src={User}
+                    width={40}
+                    height={40}
+                    alt="ellipse icon"
+                  />
+                </td>
                 <td className="px-6 py-4">
                   <div>
                     <p className="font-semibold text-gray-900 text-sm">
