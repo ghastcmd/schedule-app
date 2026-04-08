@@ -79,6 +79,7 @@ function defaultSchedule() {
 
 export default function Schedule() {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentSelected, setCurrentSelected] = useState(0);
   const [weekState, setWeek] = useState([0, 0, 0, 0, 0, 0, 0]);
   const [day, setDay] = useState("2000-01-01");
   const [weekSchedules, setWeekSchedules] = useState([
@@ -91,25 +92,25 @@ export default function Schedule() {
     [defaultSchedule()],
   ]);
 
-  const changeDate = (e) => {
-    console.log("changed date");
-    console.log(e);
-    const weekDates = dates(e);
-    if (e !== "") setWeek(weekDates);
-  };
+  // const changeDate = (e) => {
+  //   console.log("changed date");
+  //   console.log(e);
+  //   const weekDates = dates(e);
+  //   if (e !== "") setWeek(weekDates);
+  // };
 
-  const dates = (current) => {
-    setDay(current);
-    const week = [];
-    // Starting Monday not Sunday
-    current = new Date(current);
-    current.setDate(current.getDate() - current.getDay());
-    for (let i = 0; i < 7; i++) {
-      week.push(current.getDate());
-      current.setDate(current.getDate() + 1);
-    }
-    return week;
-  };
+  // const dates = (current) => {
+  //   setDay(current);
+  //   const week = [];
+  //   // Starting Monday not Sunday
+  //   current = new Date(current);
+  //   current.setDate(current.getDate() - current.getDay());
+  //   for (let i = 0; i < 7; i++) {
+  //     week.push(current.getDate());
+  //     current.setDate(current.getDate() + 1);
+  //   }
+  //   return week;
+  // };
 
   const fetchWeekDays = async () => {
     const data = await fetch(`http://localhost:3030/schedules/d/${day}`);
@@ -207,13 +208,13 @@ export default function Schedule() {
 
   return (
     <div className="h-screen flex flex-col m-0">
-      <div className="flex justify-center items-center">
+      {/* <div className="flex justify-center items-center">
         <input
           className="p-2 px-6 border-slate-300"
           type="date"
           onChange={(e) => changeDate(e.target.value)}
         />
-      </div>
+      </div> */}
 
       <div className="flex justify-center">
         <div className="mt-[2rem] w-11/12 min-h-[40rem] flex flex-col bg-white border-[1px] border-slate-400 rounded-md">
@@ -260,7 +261,8 @@ export default function Schedule() {
             {daysOfTheWeed.map((day, index) => (
               <div
                 key={index}
-                className="min-h-[6rem] rounded-md bg-slate-50 border-[1px] border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all"
+                className={`min-h-[6rem] rounded-md bg-slate-50 border-[1px] border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all cursor-pointer font-bold ${currentSelected === index + 1 ? "bg-blue-100 border-blue-300" : ""}`}
+                onClick={(e) => setCurrentSelected(index + 1)}
               >
                 <div className="ml-3 mt-2">{day}</div>
               </div>
