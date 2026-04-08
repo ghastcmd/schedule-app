@@ -133,7 +133,7 @@ export default function Schedule() {
       currentDate.getMonth() + 1,
       0,
     ).getDate();
-    console.log(daysInMonth);
+    // console.log(daysInMonth);
     return daysInMonth;
   };
 
@@ -163,6 +163,12 @@ export default function Schedule() {
       1,
     );
     setCurrentDate(new Date(updateNewYear));
+  };
+
+  const getCurrentDayNumber = () => {
+    const currentDay = currentDate.getDate();
+    // console.log(currentDay);
+    return currentDay;
   };
 
   const getMonthName = () => {
@@ -261,7 +267,7 @@ export default function Schedule() {
             {daysOfTheWeed.map((day, index) => (
               <div
                 key={index}
-                className={`min-h-[6rem] rounded-md bg-slate-50 border-[1px] border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all cursor-pointer font-bold ${currentSelected === index + 1 ? "bg-blue-100 border-blue-300" : ""}`}
+                className={`min-h-[6rem] rounded-md bg-slate-50 border-[1px] border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all cursor-pointer font-bold ${currentSelected === index + 1 && getCurrentDayNumber() !== index + 1 ? "bg-blue-100 border-blue-300 hover:bg-blue-100 hover:border-blue-400" : ""} ${getCurrentDayNumber() === index + 1 ? "bg-teal-50 border-teal-300 hover:bg-teal-50 hover:border-teal-400" : ""}`}
                 onClick={(e) => setCurrentSelected(index + 1)}
               >
                 <div className="ml-3 mt-2">{day}</div>
