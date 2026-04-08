@@ -32,23 +32,28 @@ export default function Menu() {
   const buttonStyle =
     "bg-blue-500 text-white p-2 m-1 mt-4 hover:bg-blue-700 border-solid border-2 border-transparent cursor-pointer hover:border-blue-500 hover:bg-slate-100 hover:text-black";
 
+  const MenuLogo = () => {
+    return (
+      <div>
+        <div className="relative cursor-pointer" onClick={toggleClicked}>
+          <div className={`rounded-full bg-blue-600 w-10 h-10 m-2`}></div>
+          <div className={`absolute w-12 h-1 top-4 bg-white`}></div>
+          <div className={`absolute top-0 left-6 w-1 h-12 bg-white`}></div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="bg-white p-2 flex flex-row items-center m-0 mb-4 border-solid border-b-2 border-blue-400">
-        <div className="relative cursor-pointer" onClick={toggleClicked}>
-          <div className={`rounded-full bg-blue-600 w-10 h-10 m-2`}></div>
-          <div className={`absolute w-12 h-1 top-6 bg-white`}></div>
-          <div className={`absolute top-1 left-6 w-1 h-12 bg-white`}></div>
-        </div>
+        <MenuLogo />
       </div>
 
       <div
         className={`bg-white w-72 h-screen p-2 h-full absolute ${clicked ? "left-0" : "-left-72"} border-r-2 border-blue-400 border-solid transition-all z-30`}
       >
-        <div
-          className={`rounded-full bg-blue-600 w-10 h-10 m-2 cursor-pointer`}
-          onClick={toggleClicked}
-        ></div>
+        <MenuLogo />
 
         <div
           className={`${buttonStyle}`}
