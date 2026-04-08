@@ -124,6 +124,27 @@ export default function Schedule() {
     fetchWeekDays();
   }, [weekState]);
 
+  const getMonthDays = () => {
+    const currentDate = new Date();
+    const daysInMonth = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      0,
+    ).getDate();
+    console.log(daysInMonth);
+    return daysInMonth;
+  };
+
+  const getFirstDayOfWeekMonth = () => {
+    const currentDate = new Date();
+    const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1); // Set to the first day of the month
+    const dayOfWeek = date.getDay();
+    return dayOfWeek;
+  };
+
+  const monthStart = getFirstDayOfWeekMonth();
+  const daysOfTheWeed = Array.from({ length: getMonthDays() }, (_, i) => i + 1);
+
   return (
     <div className="h-screen flex flex-col m-0">
       <div className="flex justify-center items-center">
@@ -135,8 +156,48 @@ export default function Schedule() {
       </div>
 
       <div className="flex justify-center">
-        <div className="grid grid-cols-7 mt-[2rem] w-11/12 h-[40rem] bg-white">
-          <Column
+        <div className="mt-[2rem] w-11/12 h-[40rem] flex flex-col bg-white border-[1px] border-slate-400 rounded-md">
+          <div className="text-xl font-bold m-6 mb-10 flex flex-row">
+            <div className="grow">Fevereiro 2026</div>
+            <div className="relative">
+              <div className="flex flex-row absolute -top-3 -left-24">
+                <div className="text-slate-500 px-4 py-2 mr-5 rounded-xl hover:bg-slate-100 select-none">
+                  {"<"}
+                </div>
+                <div className="text-slate-500 px-4 py-2 rounded-xl hover:bg-slate-100 select-none">
+                  {">"}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full text-center text-slate-600 grid grid-cols-7 mt-2 text-sm font-bold">
+            <div>Dom</div>
+            <div>Seg</div>
+            <div>Ter</div>
+            <div>Qua</div>
+            <div>Qui</div>
+            <div>Sex</div>
+            <div>Sáb</div>
+          </div>
+
+          <div className="grid grid-cols-7 gap-4 p-4 w-full flex-1">
+            {Array(monthStart)
+              .fill(0)
+              .map((id, key) => (
+                <div
+                  className="bg-slate-50 rounded-md border-[1px] border-slate-100"
+                  key={key}
+                ></div>
+              ))}
+            {daysOfTheWeed.map((day, index) => (
+              <div
+                key={index}
+                className="rounded-md bg-slate-50 border-[1px] border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all"
+              >
+                <div className="ml-3 mt-2">{day}</div>
+              </div>
+            ))}
+            {/* <Column
             weekNum={0}
             dayNum={weekState[0]}
             schedules={weekSchedules[0]}
@@ -177,7 +238,8 @@ export default function Schedule() {
             dayNum={weekState[6]}
             values={["paciente", "paciente 2\n10:30"]}
             schedules={weekSchedules[6]}
-          />
+          /> */}
+          </div>
         </div>
       </div>
     </div>
