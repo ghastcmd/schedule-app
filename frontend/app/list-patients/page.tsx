@@ -75,6 +75,9 @@ export default function ListPacients() {
                 Contato
               </th>
               <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                Acompanhamento
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
                 Ação
               </th>
             </tr>
@@ -92,19 +95,22 @@ export default function ListPacients() {
                   />
                 </td>
                 <td className="px-6 py-4">
-                  <div>
+                  {patient.name}
+                  {/* <div>
+                    
                     <p className="font-semibold text-gray-900 text-sm">
-                      {patient.name}
+                      
                     </p>
-                    <p className="text-xs text-gray-500">{patient.insurance}</p>
-                  </div>
+                  </div> */}
                 </td>
                 <td className="px-6 py-4">
-                  <div className="text-sm">
-                    <p className="text-gray-900">{patient.phone}</p>
+                  {patient.phone}
+                  {/* <div className="text-sm">
+                    <p className="text-gray-900"></p>
                     <p className="text-gray-500">{patient.email}</p>
-                  </div>
+                  </div> */}
                 </td>
+                <td className="px-6 py-4">{patient.followup}</td>
                 <td className="px-6 py-4">
                   <Link href={`/list-patients/${patient.id}`}>
                     <button
