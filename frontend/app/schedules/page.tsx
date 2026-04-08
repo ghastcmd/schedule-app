@@ -78,6 +78,7 @@ function defaultSchedule() {
 }
 
 export default function Schedule() {
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [weekState, setWeek] = useState([0, 0, 0, 0, 0, 0, 0]);
   const [day, setDay] = useState("2000-01-01");
   const [weekSchedules, setWeekSchedules] = useState([
@@ -125,7 +126,7 @@ export default function Schedule() {
   }, [weekState]);
 
   const getMonthDays = () => {
-    const currentDate = new Date();
+    // const currentDate = new Date();
     const daysInMonth = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth() + 1,
@@ -136,7 +137,7 @@ export default function Schedule() {
   };
 
   const getFirstDayOfWeekMonth = () => {
-    const currentDate = new Date();
+    // const currentDate = new Date();
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1); // Set to the first day of the month
     const dayOfWeek = date.getDay();
     return dayOfWeek;
@@ -144,6 +145,65 @@ export default function Schedule() {
 
   const monthStart = getFirstDayOfWeekMonth();
   const daysOfTheWeed = Array.from({ length: getMonthDays() }, (_, i) => i + 1);
+
+  const decreaseMonth = () => {
+    const updateNewYear = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - 1,
+      1,
+    );
+    setCurrentDate(new Date(updateNewYear));
+  };
+
+  const increaseMonth = () => {
+    const updateNewYear = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      1,
+    );
+    setCurrentDate(new Date(updateNewYear));
+  };
+
+  const getMonthName = () => {
+    switch (currentDate.getMonth()) {
+      case 0:
+        return "Janeiro";
+        break;
+      case 1:
+        return "Fevereiro";
+        break;
+      case 2:
+        return "Março";
+        break;
+      case 3:
+        return "Abril";
+        break;
+      case 4:
+        return "Maio";
+        break;
+      case 5:
+        return "Junho";
+        break;
+      case 6:
+        return "Julho";
+        break;
+      case 7:
+        return "Agosto";
+        break;
+      case 8:
+        return "Setembro";
+        break;
+      case 9:
+        return "Outubro";
+        break;
+      case 10:
+        return "Novembro";
+        break;
+      case 11:
+        return "Dezembro";
+        break;
+    }
+  };
 
   return (
     <div className="h-screen flex flex-col m-0">
@@ -156,15 +216,23 @@ export default function Schedule() {
       </div>
 
       <div className="flex justify-center">
-        <div className="mt-[2rem] w-11/12 h-[40rem] flex flex-col bg-white border-[1px] border-slate-400 rounded-md">
+        <div className="mt-[2rem] w-11/12 min-h-[40rem] flex flex-col bg-white border-[1px] border-slate-400 rounded-md">
           <div className="text-xl font-bold m-6 mb-10 flex flex-row">
-            <div className="grow">Fevereiro 2026</div>
+            <div className="grow">
+              {getMonthName()} {currentDate.getFullYear()}
+            </div>
             <div className="relative">
               <div className="flex flex-row absolute -top-3 -left-24">
-                <div className="text-slate-500 px-4 py-2 mr-5 rounded-xl hover:bg-slate-100 select-none">
+                <div
+                  className="text-slate-500 px-4 py-2 mr-5 rounded-xl hover:bg-slate-100 select-none"
+                  onClick={decreaseMonth}
+                >
                   {"<"}
                 </div>
-                <div className="text-slate-500 px-4 py-2 rounded-xl hover:bg-slate-100 select-none">
+                <div
+                  className="text-slate-500 px-4 py-2 rounded-xl hover:bg-slate-100 select-none"
+                  onClick={increaseMonth}
+                >
                   {">"}
                 </div>
               </div>
@@ -185,14 +253,14 @@ export default function Schedule() {
               .fill(0)
               .map((id, key) => (
                 <div
-                  className="bg-slate-50 rounded-md border-[1px] border-slate-100"
+                  className="min-h-[6rem] bg-slate-50 rounded-md border-[1px] border-slate-100"
                   key={key}
                 ></div>
               ))}
             {daysOfTheWeed.map((day, index) => (
               <div
                 key={index}
-                className="rounded-md bg-slate-50 border-[1px] border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all"
+                className="min-h-[6rem] rounded-md bg-slate-50 border-[1px] border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all"
               >
                 <div className="ml-3 mt-2">{day}</div>
               </div>
